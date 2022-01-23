@@ -106,14 +106,14 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
+" need for 'ryanoasis/vim-devicons'
 set guifont=DroidSansMono\ Nerd\ Font\ 11
 
 filetype plugin on
 
-"nnoremap <silent> <A-c> :NERDCommenterToggle<CR>
-" vmap <silent><C-C> <Plug>NERDCommenterToggle
-" dsdsadsa
-"
+" NERDCommenter toggle
 vmap ++ <plug>NERDCommenterToggle
 nmap ++ <plug>NERDCommenterToggle
 
+" Restore cursor position in file
+autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
