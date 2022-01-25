@@ -24,11 +24,14 @@ call plug#begin("~/.vim/plugged")
 
   " Nerd commenter
   Plug 'preservim/nerdcommenter'
+
+  Plug 'christoomey/vim-tmux-navigator'
+
 call plug#end()
 
 " Enable theming support
 if (has("termguicolors"))
- set termguicolors
+ "set termguicolors
 endif
 
 " Theme
@@ -40,6 +43,7 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
+" 
 " let g:airline_symbols.branch = ''
 " let g:airline_symbols.readonly = ''
 " let g:airline_symbols.linenr = ''
@@ -49,6 +53,7 @@ let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
 let g:NERDTreeWinSize=50
+let g:NERDTreeMapOpenInTab='<TAB>'
 
 " Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -89,12 +94,18 @@ au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 " uses zsh instead of bash
 function! OpenTerminal()
   split term://bash
-  resize 15
+  resize 20
 endfunction
 nnoremap <c-n> :call OpenTerminal()<CR>
 
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 
+nnoremap <C-t><c-n> :tabnew<CR>
+                                             
+noremap <silent> <C-S>   :update<CR>
+vnoremap <silent> <C-S>  <C-C>:update<CR>
+inoremap <silent> <C-S>  <C-O>:update<CR>
+                     
 " Config Section
 
 set encoding=UTF-8
@@ -105,6 +116,12 @@ set nowrap
 set tabstop=2
 set shiftwidth=2
 set expandtab
+
+" highlight current cursorline
+set cursorline       
+
+set mouse=a
+set clipboard=unnamedplus
 
 " need for 'ryanoasis/vim-devicons'
 set guifont=DroidSansMono\ Nerd\ Font\ 11
