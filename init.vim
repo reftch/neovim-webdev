@@ -8,7 +8,7 @@ call plug#begin("~/.vim/plugged")
 
   " Language Client
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
+  let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-ltex', 'coc-snippets']
   
 	" TypeScript Highlighting
   Plug 'leafgarland/typescript-vim'
@@ -43,8 +43,12 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
-" 
-" let g:airline_symbols.branch = ''
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#virtualenv#enabled = 1
+let g:airline#extensions#tmuxline#enabled = 0
+
+"
+"let g:airline_symbols.branch = ''
 " let g:airline_symbols.readonly = ''
 " let g:airline_symbols.linenr = ''
 
@@ -87,6 +91,13 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
+" Move line up and down
+noremap <c-s-up> :call feedkeys( line('.')==1 ? '' : 'ddkP' )<CR>
+noremap <c-s-down> ddp
+
+" Copy line down
+noremap <c-down> yyp
+
 " start terminal in insert mode
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
@@ -94,7 +105,7 @@ au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 " uses zsh instead of bash
 function! OpenTerminal()
   split term://bash
-  resize 20
+  resize 16
 endfunction
 nnoremap <c-n> :call OpenTerminal()<CR>
 
